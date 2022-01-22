@@ -25,4 +25,5 @@ public class Contact {
     @Column
     private String email;
 
+
 }

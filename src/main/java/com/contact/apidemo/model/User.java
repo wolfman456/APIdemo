@@ -1,5 +1,7 @@
 package com.contact.apidemo.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,11 @@ public class User {
     private Long id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
+    @NotNull
     private String email;
 
     @Column
@@ -60,5 +64,6 @@ public class User {
     public void setPhone(Integer phone) {
         this.phone = phone;
     }
+
 }
 
