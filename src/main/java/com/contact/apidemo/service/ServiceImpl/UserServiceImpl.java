@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.findAll();
     }
 
+    @Override
+    public User getSingleUser(Long userId) {
+        return null;
+    }
+
 }

@@ -35,4 +35,11 @@ public class UserController {
         System.out.println("Calling get all user controller");
         return userService.getAllUsers();
     }
+
+    //http://localhost:8080/api/getAllUsers
+    @GetMapping("/getSingleuser/{userId}")
+    public User getSingleUser(@PathVariable Long userId){
+        return userService.getSingleUser(userId);
+    }
+
 }
