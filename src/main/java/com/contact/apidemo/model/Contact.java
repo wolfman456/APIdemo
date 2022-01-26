@@ -1,7 +1,7 @@
 package com.contact.apidemo.model;
 
 import com.sun.istack.NotNull;
-import jdk.jfr.Enabled;
+
 
 import javax.persistence.*;
 
@@ -25,5 +25,38 @@ public class Contact {
     @Column
     private String email;
 
+    public Contact() {
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
