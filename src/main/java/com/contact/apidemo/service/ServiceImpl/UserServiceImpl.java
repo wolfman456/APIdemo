@@ -1,6 +1,7 @@
 package com.contact.apidemo.service.ServiceImpl;
 
 import com.contact.apidemo.exception.InformationExistException;
+import com.contact.apidemo.exception.InformationNotFoundException;
 import com.contact.apidemo.model.User;
 import com.contact.apidemo.repository.UserRepo;
 import com.contact.apidemo.service.UserService;
@@ -36,7 +37,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getSingleUser(Long userId) {
-        return null;
+        System.out.println("all get single user");
+       if(!userRepo.existsById(userId)){
+           throw new InformationNotFoundException("No User is " + userId + " found");
+       }else{
+           return userRepo.getById(userId);
+       }
     }
 
 }
