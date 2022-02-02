@@ -36,10 +36,23 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    //http://localhost:8080/api/getAllUsers
-    @GetMapping("/getSingleuser/{userId}")
+    //http://localhost:8080/api/{userID}
+    @GetMapping("/getSingleUser/{userId}")
     public User getSingleUser(@PathVariable Long userId){
         return userService.getSingleUser(userId);
     }
+
+    //http://localhost:8080/api/{userID}
+    @PutMapping("/getSingleUser/{userId}")
+    public User updateUser(@PathVariable (value = "userId") Long userId, @RequestBody User user){
+        return userService.updateUser(userId, user);
+    }
+
+    //http://localhost:8080/api/{userID}
+    @DeleteMapping("/getSingleUser/{userId}")
+    public String deleteUser(@PathVariable(value = "userId") Long userId){
+        return userService.deleteUser(userId);
+    }
+
 
 }

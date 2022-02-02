@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,5 +45,33 @@ public class UserServiceImpl implements UserService {
            return userRepo.getById(userId);
        }
     }
+
+    @Override
+    public User updateUser(Long userId, User user) {
+        User userObject = userRepo.findUserById(userId);
+        if(userObject == null){
+            throw new InformationNotFoundException("no user with iD " + userId + " found");
+        }else {
+            userObject.setEmail(user.getEmail());
+            userObject.setPhone(user.getPhone());
+            userObject.setName(userObject.getName());
+            return userRepo.save(userObject);
+        }
+
+
+
+    }
+
+    @Override
+    public String deleteUser(Long userId) {
+        User user = userRepo.findUserById(userId);
+        if(user == null){
+            throw new InformationNotFoundException("No user with ID " + userId + " found");
+        }else {
+            userRepo.delete(user);
+            return " User " + user.getName() + " has been deleted";
+        }
+    }
+
 
 }
