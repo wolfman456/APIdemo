@@ -1,11 +1,14 @@
 package com.contact.apidemo.model;
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
     @Column
@@ -16,12 +19,18 @@ public class User {
     @NotNull
     private String name;
 
+
+
     @Column
     @NotNull
     private String email;
 
     @Column
     private Integer phone;
+
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Contact> contacts;
 
     public User() {
     }
@@ -63,6 +72,14 @@ public class User {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
 }

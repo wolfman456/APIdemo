@@ -1,5 +1,6 @@
 package com.contact.apidemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 
@@ -24,6 +25,19 @@ public class Contact {
 
     @Column
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Contact() {
     }
