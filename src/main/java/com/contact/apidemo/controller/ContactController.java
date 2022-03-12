@@ -6,6 +6,7 @@ import com.contact.apidemo.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -23,6 +24,12 @@ public class ContactController {
                                  @RequestBody Contact contact){
         System.out.println("calling create contact");
         return contactService.createContact(userId, contact);
+    }
+
+    @GetMapping("/contact")
+    public List<Contact> getAllContact(@PathVariable(value = "userId")Long  userId){
+        System.out.println("calling getAllContacts controller ==========>");
+        return contactService.getAllContacts(userId);
     }
 
 

@@ -9,6 +9,8 @@ import com.contact.apidemo.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ContactServiceImpl implements ContactService {
     @Autowired
@@ -31,5 +33,30 @@ public class ContactServiceImpl implements ContactService {
             contactObject.setPhone(contact.getPhone());
         }
         return contactRepo.save(contactObject);
+    }
+
+    @Override
+    public List<Contact> getAllContacts(Long userId) {
+        User user = userRepo.findUserById(userId);
+        if (user != null) {
+            return user.getContacts();
+        }else {
+            throw new RuntimeException("No user with " + userId + " found.");
+        }
+    }
+
+    @Override
+    public Contact getSingleContact(Long userId, Long contactId) {
+        return null;
+    }
+
+    @Override
+    public Contact updateContact(Long userId, Long contactId, Contact contactObject) {
+        return null;
+    }
+
+    @Override
+    public String deleteContact(Long userId, Long ContactId) {
+        return null;
     }
 }
