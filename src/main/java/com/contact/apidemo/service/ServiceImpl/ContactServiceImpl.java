@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -48,11 +49,27 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact getSingleContact(Long userId, Long contactId) {
         return null;
+
+
     }
 
     @Override
     public Contact updateContact(Long userId, Long contactId, Contact contactObject) {
-        return null;
+        User user = userRepo.findUserById(userId);
+        if (user == null){
+            throw new RuntimeException("No user with " + userId + " found");
+        }else {
+            Optional<Contact> contact = contactRepo.findContactByUser_Id(user.getId()).stream().filter((p) -> p.getId().equals(contactId)).findFirst();
+            if (contact.isEmpty()) {
+                throw new RuntimeException("No contact with " + contactId + " found");
+            }else {
+                contact.get().setPhone(contactObject.getPhone());
+                contact.get().setEmail(contactObject.getEmail());
+                contact.get().setName(contactObject.getName());
+                return contactRepo.save(contact.get());
+
+            }
+        }
     }
 
     @Override
